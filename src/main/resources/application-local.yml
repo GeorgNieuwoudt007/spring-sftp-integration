@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: spring-boot-ftp-integration
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+
+configuration:
+  sftp:
+    file:
+      filter_extension: txt
+      sources:
+        local: share
+        remote: share
+    outbound:
+      username: admin
+      password: admin
+      port: 22
+      host: localhost
+    inbound:
+      username: admin
+      password: admin
+      port: 22
+      host: localhost

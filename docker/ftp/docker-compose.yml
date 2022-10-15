@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  sftp:
+    image: atmoz/sftp
+    ports:
+      - "22:22"
+      - "30000-30009:30000-30009"
+    command: admin:admin:1001
+    networks:
+      - ftp_network
+    volumes:
+      - ./init.sh:/etc/sftp.d/init.sh:ro
+
+networks:
+  ftp_network:
+    driver: bridge
