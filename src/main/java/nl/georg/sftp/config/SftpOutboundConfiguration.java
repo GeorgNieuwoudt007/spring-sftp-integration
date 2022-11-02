@@ -36,12 +36,16 @@ public class SftpOutboundConfiguration {
         return new CachingSessionFactory<>(factory);
     }
 
+
+    /**
+     * Gateway
+     */
     @MessagingGateway
-    public interface UploadGateway {
+    public interface OutboundGateway {
 
         @Gateway(
-                requestChannel = "share"
+                requestChannel = "toSftpChannel"
         )
-        void sendToSftp(File file);
+        void send(File file);
     }
 }

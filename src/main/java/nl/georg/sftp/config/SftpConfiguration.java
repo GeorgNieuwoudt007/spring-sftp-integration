@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.expression.common.LiteralExpression;
-import org.springframework.integration.annotation.*;
+import org.springframework.integration.annotation.InboundChannelAdapter;
+import org.springframework.integration.annotation.Poller;
+import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.file.filters.AcceptOnceFileListFilter;
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
@@ -30,7 +32,7 @@ public class SftpConfiguration {
     // For Uploading the file on remote server, we need to create a Messaging
     // Gateway
     @Autowired
-    private OutboundGateway outboundGateway;
+    private SftpOutboundConfiguration.OutboundGateway outboundGateway;
 
     // Properties of Remote Host
     @Value("${configuration.sftp.inbound.host}")
@@ -52,10 +54,10 @@ public class SftpConfiguration {
 
     @Value("${configuration.sftp.inbound.password}")
     private String inboundPassword;
-    @Value("${configuration.sftp.file.sources.local}")
+    @Value("${configuration.sftp.file.sources.remote.response}")
     private String inboundDirectory;
     // Local Directory for Download
-    @Value("${configuration.sftp.file.sources.local}")
+    @Value("${configuration.sftp.file.sources.local.response}")
     private String inboundLocalDirectory;
     @Value("${configuration.sftp.file.filter}")
     private String inboundDownloadFilter;
@@ -69,7 +71,7 @@ public class SftpConfiguration {
     private String outboundUsername;
     @Value("${configuration.sftp.outbound.password}")
     private String outboundPassword;
-    @Value("${configuration.sftp.file.sources.remote}")
+    @Value("${configuration.sftp.file.sources.remote.request}")
     private String remoteDirectory;
 
     /**
@@ -164,17 +166,5 @@ public class SftpConfiguration {
         handler.setFileNameGenerator(new OutboundFileNameGenerator());
 
         return handler;
-    }
-
-    /**
-     * Gateway
-     */
-    @MessagingGateway
-    public interface OutboundGateway {
-
-        @Gateway(
-                requestChannel = "toSftpChannel"
-        )
-        void send(File file);
     }
 }

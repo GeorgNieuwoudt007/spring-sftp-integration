@@ -1,7 +1,7 @@
 package nl.georg.sftp.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.georg.sftp.config.SftpConfiguration.OutboundGateway;
+import nl.georg.sftp.config.SftpOutboundConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
@@ -15,7 +15,7 @@ import java.io.File;
 public class InboundMessageHandler implements MessageHandler {
 
     @Autowired
-    private OutboundGateway outboundGateway;
+    private SftpOutboundConfiguration.OutboundGateway outboundGateway;
 
     @Override
     public void handleMessage(Message<?> message) throws MessagingException {

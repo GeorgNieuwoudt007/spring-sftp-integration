@@ -24,9 +24,9 @@ import java.io.File;
 @Configuration
 public class SftpInboundConfiguration {
 
-    @Value("${configuration.sftp.file.sources.remote}")
+    @Value("${configuration.sftp.file.sources.remote.response}")
     private String remoteDirectory;
-    @Value("${configuration.sftp.file.sources.local}")
+    @Value("${configuration.sftp.file.sources.local.response}")
     private String localDirectory;
     @Value("${configuration.sftp.inbound.username}")
     private String username;
@@ -37,7 +37,7 @@ public class SftpInboundConfiguration {
     @Value("${configuration.sftp.inbound.port}")
     private Integer port;
     @Value("${configuration.sftp.file.filter}")
-    private String extension;
+    private String filter;
 
 
     @Bean
@@ -57,7 +57,7 @@ public class SftpInboundConfiguration {
         var fileSynchronizer = new SftpInboundFileSynchronizer(sftpSessionInboundFactory());
         fileSynchronizer.setDeleteRemoteFiles(true);
         fileSynchronizer.setRemoteDirectory(remoteDirectory);
-        fileSynchronizer.setFilter(new SftpSimplePatternFileListFilter(extension));
+        fileSynchronizer.setFilter(new SftpSimplePatternFileListFilter(filter));
 
         return fileSynchronizer;
     }
