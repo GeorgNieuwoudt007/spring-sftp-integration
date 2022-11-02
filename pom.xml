@@ -20,6 +20,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <tomcat.version>10.1.1</tomcat.version>
         <utilities.version>1.0.0-SNAPSHOT</utilities.version>
         <spring.integration.sftp.version>5.5.15</spring.integration.sftp.version>
         <spring.security.version>5.7.3</spring.security.version>

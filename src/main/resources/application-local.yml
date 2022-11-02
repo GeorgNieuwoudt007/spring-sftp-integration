@@ -13,8 +13,8 @@ configuration:
   sftp:
     file:
       sources:
-        local: share
-        remote: share
+        local: share/request
+        remote: share/response
       filter: '*.txt'
     outbound:
       username: admin

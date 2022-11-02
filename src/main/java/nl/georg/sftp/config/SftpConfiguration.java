@@ -126,7 +126,7 @@ public class SftpConfiguration {
     @InboundChannelAdapter(
             channel = "sftpChannel",
             poller = @Poller(
-                    fixedDelay = "5000"
+                    fixedDelay = "30000"
             )
     )
     public MessageSource<File> inboundSftpMessageSource() {
